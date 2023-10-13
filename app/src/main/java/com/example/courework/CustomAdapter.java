@@ -18,14 +18,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.courework.fragment.AddFragment;
+import com.example.courework.activities.MainActivity;
+import com.example.courework.activities.UpdateActivity;
+import com.example.courework.models.Hiker;
 
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> implements Filterable {
 
     private Context context;
-    Activity activity;
     ArrayList<Hiker> hikers;
     ArrayList<Hiker> hikersSearch;
 
@@ -93,12 +94,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         LinearLayout mainLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameR_txt = itemView.findViewById(R.id.name_row_txt);
-            locationR_txt = itemView.findViewById(R.id.location_row_txt);
+            nameR_txt = itemView.findViewById(R.id.name_ob_row_txt);
+            locationR_txt = itemView.findViewById(R.id.comment_row_txt);
             dohR_txt = itemView.findViewById(R.id.doh_row_txt);
-            delete_btn_one = itemView.findViewById(R.id.delete_btn_one);
-            update_btn_out = itemView.findViewById(R.id.update_btn_out);
-            mainLayout = itemView.findViewById(R.id.mainLayout);
+            delete_btn_one = itemView.findViewById(R.id.delete_btn_ob_row);
+            update_btn_out = itemView.findViewById(R.id.update_btn_ob);
+            mainLayout = itemView.findViewById(R.id.mainLayout_ob);
         }
     }
 
@@ -132,7 +133,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(context);
-                myDB.deleteOneRow(id);
+                myDB.deleteOneRowHiker(id);
                 Intent intent = new Intent(context, MainActivity.class);
                 ((Activity)context).startActivity(intent);
 

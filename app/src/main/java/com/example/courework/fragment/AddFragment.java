@@ -24,8 +24,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.courework.Hiker;
-import com.example.courework.MainActivity;
+import com.example.courework.models.Hiker;
+import com.example.courework.activities.MainActivity;
 import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
 
@@ -43,7 +43,7 @@ public class AddFragment extends Fragment {
     RadioButton no_rb;
     Button save_btn;
     private DatePickerDialog.OnDateSetListener dateSetListener;
-    String name, location, doh, des, level, parking;
+    String id, name, location, doh, des, level, parking;
     int length;
     MyDatabaseHelper myDB;
     ArrayList<Hiker> hikers;
@@ -84,7 +84,7 @@ public class AddFragment extends Fragment {
         des_edt = mView.findViewById(R.id.des_edt);
         yes_rb = mView.findViewById(R.id.yes_rb);
         no_rb = mView.findViewById(R.id.no_rb);
-        save_btn = mView.findViewById(R.id.save_btn);
+        save_btn = mView.findViewById(R.id.save_ob_btn);
         level_spinner = mView.findViewById(R.id.level_spinner);
 
         myDB = new MyDatabaseHelper(getActivity());
@@ -120,7 +120,7 @@ public class AddFragment extends Fragment {
                     RadioButton rb = mView.findViewById(id_btn);
                     parking = rb.getText().toString();
 
-                    myDB.addHiker(name, location, doh, parking, length, level, des);
+                    myDB.addHiker(new Hiker(id, name, location, doh, parking, length, level, des));
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     startActivity(intent);
                 }
@@ -165,7 +165,7 @@ public class AddFragment extends Fragment {
     }
 
     private void storeDataInArrays() {
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = myDB.readAllDataHiker();
         if (cursor.getCount() == 0) {
             Toast.makeText(getActivity(), "NO DATA", Toast.LENGTH_SHORT).show();
         } else {

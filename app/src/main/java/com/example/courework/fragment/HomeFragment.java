@@ -1,32 +1,24 @@
 package com.example.courework.fragment;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.courework.CustomAdapter;
-import com.example.courework.Hiker;
-import com.example.courework.MainActivity;
+import com.example.courework.models.Hiker;
+import com.example.courework.activities.MainActivity;
 import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -100,7 +92,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void storeDataInArrays() {
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = myDB.readAllDataHiker();
         if (cursor.getCount() == 0) {
             Toast.makeText(getActivity(), "NO DATA", Toast.LENGTH_SHORT).show();
         } else {
@@ -127,7 +119,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(getActivity());
-                myDB.deleteAllData();
+                myDB.deleteAllDataHiker();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }

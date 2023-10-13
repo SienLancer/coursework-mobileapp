@@ -1,4 +1,4 @@
-package com.example.courework;
+package com.example.courework.models;
 
 public class Hiker {
     private String id;
@@ -84,4 +84,6 @@ public class Hiker {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }

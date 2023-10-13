@@ -1,4 +1,4 @@
-package com.example.courework;
+package com.example.courework.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.example.courework.R;
 import com.example.courework.databinding.ActivityMainBinding;
 import com.example.courework.fragment.AddFragment;
 import com.example.courework.fragment.HomeFragment;
