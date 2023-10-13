@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">comp1786-L3-4-android-gui</string>
+    <string name="app_name">Coursework</string>
     <string-array name="workStatus">
         <item>None</item>
         <item>High</item>

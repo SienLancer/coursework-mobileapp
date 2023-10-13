@@ -1,20 +1,27 @@
 package com.example.courework.fragment;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.courework.CustomAdapter;
@@ -32,6 +39,7 @@ public class HomeFragment extends Fragment {
     RecyclerView rv;
     FloatingActionButton delAll_fab;
     MyDatabaseHelper myDB;
+    SearchView name_sv;
 
     ArrayList<Hiker> hikers;
     CustomAdapter customAdapter;
@@ -60,6 +68,7 @@ public class HomeFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_home, container, false);
         rv = mView.findViewById(R.id.rv);
         delAll_fab = mView.findViewById(R.id.deleteAll_fab);
+        name_sv = mView.findViewById(R.id.name_sv);
         myDB = new MyDatabaseHelper(getActivity());
         hikers = new ArrayList<>();
 
@@ -68,6 +77,22 @@ public class HomeFragment extends Fragment {
         customAdapter = new CustomAdapter(getActivity(), hikers);
         rv.setAdapter(customAdapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+//        rv.addItemDecoration(itemDecoration);
+
+        name_sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                customAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                customAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         delAll_fab.setOnClickListener(view -> confirmDialogForAll());
 
@@ -116,7 +141,6 @@ public class HomeFragment extends Fragment {
         builder.create().show();
 
     }
-
 
 
 

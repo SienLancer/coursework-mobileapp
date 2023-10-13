@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,15 +22,17 @@ import com.example.courework.fragment.AddFragment;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> implements Filterable {
 
     private Context context;
     Activity activity;
     ArrayList<Hiker> hikers;
+    ArrayList<Hiker> hikersSearch;
 
     public CustomAdapter(Context context, ArrayList<Hiker> hikers) {
         this.context = context;
         this.hikers = hikers;
+        this.hikersSearch = hikers;
     }
 
     @NonNull
@@ -80,6 +84,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public int getItemCount() {
         return hikers.size();
     }
+
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameR_txt, locationR_txt, dohR_txt, parking_txt, length_txt, level_txt, des_txt;
@@ -139,6 +145,40 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String searchText = charSequence.toString();
+                if (searchText.isEmpty()){
+                    hikers = hikersSearch;
+                }else {
+                    ArrayList<Hiker> hl = new ArrayList<>();
+                    for (Hiker hiker : hikersSearch){
+                        if (hiker.getName().toLowerCase().contains(searchText.toLowerCase())){
+                            hl.add(hiker);
+                        }else {
+                            ArrayList<Hiker> emptyList = new ArrayList<>();
+                            hikers = emptyList;
+                        }
+                    }
+                    hikers = hl;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = hikers;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                hikers = (ArrayList<Hiker>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
 }
