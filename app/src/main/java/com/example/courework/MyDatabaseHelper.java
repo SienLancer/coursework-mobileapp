@@ -31,6 +31,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_OB = "observation_db";
     private static final String COLUMN_OID = "o_id";
     private static final String COLUMN_ONAME = "o_name";
+    private static final String COLUMN_TOO = "time_of_ob";
     private static final String COLUMN_OCOMMENT = "o_comment";
     private static final String COLUMN_HIKER_ID = "hiker_id";
 
@@ -56,9 +57,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         String query_ob =
                 "CREATE TABLE " + TABLE_NAME_OB +
-                        " (" + COLUMN_OID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        " (" + COLUMN_OID + " INTEGER PRIMARY KEY, " +
                         COLUMN_ONAME + " TEXT, " +
                         COLUMN_OCOMMENT + " TEXT, " +
+                        COLUMN_TOO + " TEXT, " +
                         COLUMN_HIKER_ID + " TEXT, " +
                         " FOREIGN KEY ("+COLUMN_HIKER_ID+") REFERENCES "+TABLE_NAME_HIKER+"("+COLUMN_ID+"));";
         db.execSQL(query_hiker);
@@ -146,6 +148,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_OID, observation.getId());
         cv.put(COLUMN_ONAME, observation.getName());
+        cv.put(COLUMN_TOO, observation.getTimeOfOb());
         cv.put(COLUMN_OCOMMENT, observation.getComment());
         cv.put(COLUMN_HIKER_ID, observation.getHiker_id());
 

@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.courework.activities.MainActivity;
+import com.example.courework.activities.ObservationActivity;
 import com.example.courework.activities.UpdateActivity;
 import com.example.courework.models.Hiker;
 
@@ -47,6 +48,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Hiker hiker =hikers.get(position);
+        holder.idR_txt.setText("ID: "+hiker.getId());
         holder.nameR_txt.setText("Name: "+hiker.getName());
         holder.locationR_txt.setText("Location: "+hiker.getLocation());
         holder.dohR_txt.setText("Date of the hike: "+hiker.getDoh());
@@ -76,6 +78,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             }
         });
+
+        holder.more_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ObservationActivity.class);
+                Hiker hiker =hikers.get(position);
+                intent.putExtra("id", hiker.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
 
@@ -89,17 +101,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView nameR_txt, locationR_txt, dohR_txt, parking_txt, length_txt, level_txt, des_txt;
-        Button delete_btn_one, update_btn_out;
+        TextView nameR_txt, locationR_txt, dohR_txt, parking_txt, length_txt, level_txt, des_txt, idR_txt;
+        Button delete_btn_one, update_btn_out, more_btn;
         LinearLayout mainLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameR_txt = itemView.findViewById(R.id.name_ob_row_txt);
-            locationR_txt = itemView.findViewById(R.id.comment_row_txt);
+            nameR_txt = itemView.findViewById(R.id.name_row_txt);
+            locationR_txt = itemView.findViewById(R.id.location_row_txt);
             dohR_txt = itemView.findViewById(R.id.doh_row_txt);
-            delete_btn_one = itemView.findViewById(R.id.delete_btn_ob_row);
-            update_btn_out = itemView.findViewById(R.id.update_btn_ob);
-            mainLayout = itemView.findViewById(R.id.mainLayout_ob);
+            delete_btn_one = itemView.findViewById(R.id.delete_btn_row);
+            update_btn_out = itemView.findViewById(R.id.update_btn_out);
+            more_btn = itemView.findViewById(R.id.more_btn);
+            idR_txt = itemView.findViewById(R.id.id_row_txt);
+            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }
 

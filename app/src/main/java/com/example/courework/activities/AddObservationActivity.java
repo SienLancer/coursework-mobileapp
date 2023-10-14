@@ -1,16 +1,144 @@
 package com.example.courework.activities;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
+import com.example.courework.models.Hiker;
+import com.example.courework.models.Observation;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AddObservationActivity extends AppCompatActivity {
+
+    MyDatabaseHelper myDB;
+    TextView too_control;
+    EditText name_ob_edt, comment_ob_edt;
+    Button save_ob_btn;
+    String id, name, too, comment, hiker_id, id_p;
+    ArrayList<Observation> observations;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_observation);
+
+        too_control = findViewById(R.id.too_control);
+        name_ob_edt = findViewById(R.id.name_ob_edt);
+        comment_ob_edt = findViewById(R.id.comment_ob_edt);
+        save_ob_btn = findViewById(R.id.save_ob_btn);
+        myDB = new MyDatabaseHelper(this);
+        observations = new ArrayList<>();
+        storeDataInArrays();
+        getAndSetIntentData();
+        too_control.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar kal = Calendar.getInstance();
+                int year = kal.get(Calendar.YEAR);
+                int month = kal.get(Calendar.MONTH);
+                int day = kal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog =new DatePickerDialog(AddObservationActivity.this, android.R.style.Theme_DeviceDefault_Dialog,
+                        dateSetListener, year, month, day);
+                dialog.show();
+            }
+        });
+        dateSetListener = (datePicker, year, month, day) -> {
+            month = month +1;
+            Log.d(TAG, "onDateSet: dd/mm/yyyy " + day + "/" + month + "/" + year);
+            String date = day + "/" + month + "/" + year;
+            too_control.setText(date);
+
+        };
+
+        save_ob_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                name = name_ob_edt.getText().toString().trim();
+                too = too_control.getText().toString().trim();
+                comment = comment_ob_edt.getText().toString().trim();
+                hiker_id = id_p;
+
+
+
+
+
+                if (name.matches("")) {
+                    displayFillAll();
+                } else if (too.matches("Click here to select the time of observation")) {
+                    displayFillAll();
+                } else {
+
+                    myDB.addObservation(new Observation(id, name, too, comment, hiker_id ));
+                    Intent intent = new Intent(AddObservationActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+
+
+    }
+
+    public void displayFillAll(){
+        new AlertDialog.Builder(this)
+                .setTitle("Error")
+                .setMessage(
+                        "You need to fill all required fields or fill in the correct email!"
+                )
+                .setNeutralButton("Close", (dialogInterface, i) -> {
+
+                })
+                .show();
+    }
+
+    private void storeDataInArrays() {
+        Cursor cursor = myDB.readAllDataOb();
+        if (cursor.getCount() == 0) {
+            Toast.makeText(this, "NO DATA", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(0);
+                String name = cursor.getString(1);
+                String too = cursor.getString(2);
+                String comment = cursor.getString(3);
+                String hiker_id = cursor.getString(4);
+                Observation observation = new Observation(id, name, too, comment, hiker_id);
+                observations.add(observation);
+            }
+        }
+    }
+
+    void getAndSetIntentData() {
+        if (getIntent().hasExtra("id")) {
+
+            // Geting Data from Intent
+            id_p = getIntent().getStringExtra("id");
+
+
+
+
+        }else {
+            Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
+        }
     }
 }

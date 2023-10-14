@@ -3,14 +3,24 @@ package com.example.courework.models;
 public class Observation {
     private String id;
     private String name;
+    private String timeOfOb;
     private String comment;
     private String hiker_id;
 
-    public Observation(String id, String name, String comment, String hiker_id) {
+    public Observation(String id, String name, String timeOfOb, String comment, String hiker_id) {
         this.id = id;
         this.name = name;
+        this.timeOfOb = timeOfOb;
         this.comment = comment;
         this.hiker_id = hiker_id;
+    }
+
+    public String getTimeOfOb() {
+        return timeOfOb;
+    }
+
+    public void setTimeOfOb(String timeOfOb) {
+        this.timeOfOb = timeOfOb;
     }
 
     public String getId() {

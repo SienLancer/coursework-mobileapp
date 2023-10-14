@@ -76,12 +76,12 @@ public class AddFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_add, container, false);
-        name_edt = mView.findViewById(R.id.name_edt);
+        name_edt = mView.findViewById(R.id.name_ob_edt);
         location_edt = mView.findViewById(R.id.location_edt);
-        doh_control = mView.findViewById(R.id.doh_control);
+        doh_control = mView.findViewById(R.id.too_control);
         rg = mView.findViewById(R.id.rg);
         length_edt = mView.findViewById(R.id.length_edt);
-        des_edt = mView.findViewById(R.id.des_edt);
+        des_edt = mView.findViewById(R.id.comment_ob_edt);
         yes_rb = mView.findViewById(R.id.yes_rb);
         no_rb = mView.findViewById(R.id.no_rb);
         save_btn = mView.findViewById(R.id.save_ob_btn);
@@ -91,43 +91,40 @@ public class AddFragment extends Fragment {
         hikers =new ArrayList<>();
         storeDataInArrays();
         length_edt.setText("0");
-        save_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                name = name_edt.getText().toString().trim();
-                location = location_edt.getText().toString().trim();
-                doh = doh_control.getText().toString().trim();
-                length = Integer.parseInt(length_edt.getText().toString().trim());
-                level = level_spinner.getSelectedItem().toString().trim();
-                des = des_edt.getText().toString().trim();
+        save_btn.setOnClickListener(view -> {
+            name = name_edt.getText().toString().trim();
+            location = location_edt.getText().toString().trim();
+            doh = doh_control.getText().toString().trim();
+            length = Integer.parseInt(length_edt.getText().toString().trim());
+            level = level_spinner.getSelectedItem().toString().trim();
+            des = des_edt.getText().toString().trim();
 
 
 
-                if (name.matches("")) {
-                    displayFillAll();
-                } else if (location.matches("")) {
-                    displayFillAll();
-                } else if (doh.matches("Click here to select the date of the hike")) {
-                    displayFillAll();
-                } else if (length==0) {
-                    displayFillAll();
-                } else if (level.matches("None")) {
-                    displayFillAll();
-                } else if (rg.getCheckedRadioButtonId()== -1) {
-                    displayFillAll();
-                } else {
-                    int id_btn = rg.getCheckedRadioButtonId();
-                    RadioButton rb = mView.findViewById(id_btn);
-                    parking = rb.getText().toString();
+            if (name.matches("")) {
+                displayFillAll();
+            } else if (location.matches("")) {
+                displayFillAll();
+            } else if (doh.matches("Click here to select the date of the hike")) {
+                displayFillAll();
+            } else if (length==0) {
+                displayFillAll();
+            } else if (level.matches("None")) {
+                displayFillAll();
+            } else if (rg.getCheckedRadioButtonId()== -1) {
+                displayFillAll();
+            } else {
+                int id_btn = rg.getCheckedRadioButtonId();
+                RadioButton rb = mView.findViewById(id_btn);
+                parking = rb.getText().toString();
 
-                    myDB.addHiker(new Hiker(id, name, location, doh, parking, length, level, des));
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
-                }
-
-
-
+                myDB.addHiker(new Hiker(id, name, location, doh, parking, length, level, des));
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
             }
+
+
+
         });
 
         doh_control.setOnClickListener(view -> {

@@ -1,23 +1,28 @@
 package com.example.courework;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.courework.models.Hiker;
 import com.example.courework.models.Observation;
 
 import java.util.ArrayList;
 
-public class ObservationAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.MyViewHolder> {
 
     private Context context;
+    String id;
     ArrayList<Observation> observations;
 
     public ObservationAdapter(Context context, ArrayList<Observation> observations) {
@@ -25,18 +30,26 @@ public class ObservationAdapter extends RecyclerView.Adapter<CustomAdapter.MyVie
         this.observations = observations;
     }
 
+
     @NonNull
     @Override
-    public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.ob_row, parent, false);
-        return new CustomAdapter.MyViewHolder(view);
+        View viewo = inflater.inflate(R.layout.ob_row, parent, false);
+        return new MyViewHolder(viewo);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Observation observation =observations.get(position);
+        holder.id_row_ob_txt.setText("ID: "+observation.getHiker_id());
+        holder.name_ob_row_txt.setText("Name: "+observation.getName());
+        holder.too_ob_txt.setText("Time of observation: "+observation.getTimeOfOb());
+
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -44,16 +57,20 @@ public class ObservationAdapter extends RecyclerView.Adapter<CustomAdapter.MyVie
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name_ob_row_txt, comment_ob_txt;
+        TextView name_ob_row_txt, too_ob_txt, id_row_ob_txt;
         Button delete_btn_ob_row, update_btn_ob;
         LinearLayout mainLayout_ob;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name_ob_row_txt = itemView.findViewById(R.id.name_ob_row_txt);
-            comment_ob_txt = itemView.findViewById(R.id.comment_row_txt);
+            too_ob_txt = itemView.findViewById(R.id.too_row_txt);
             update_btn_ob = itemView.findViewById(R.id.update_btn_ob);
             delete_btn_ob_row = itemView.findViewById(R.id.delete_btn_ob_row);
+            id_row_ob_txt = itemView.findViewById(R.id.id_row_ob_txt);
             mainLayout_ob = itemView.findViewById(R.id.mainLayout_ob);
         }
     }
+
+
+
 }
