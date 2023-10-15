@@ -1,11 +1,14 @@
 package com.example.courework.models;
 
+import android.net.Uri;
+
 public class Observation {
     private String id;
     private String name;
     private String timeOfOb;
     private String comment;
     private String hiker_id;
+
 
     public Observation(String id, String name, String timeOfOb, String comment, String hiker_id) {
         this.id = id;

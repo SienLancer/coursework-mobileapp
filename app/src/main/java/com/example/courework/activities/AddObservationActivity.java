@@ -2,17 +2,24 @@ package com.example.courework.activities;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,16 +28,24 @@ import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
 import com.example.courework.models.Hiker;
 import com.example.courework.models.Observation;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
 
 public class AddObservationActivity extends AppCompatActivity {
 
     MyDatabaseHelper myDB;
     TextView too_control;
     EditText name_ob_edt, comment_ob_edt;
-    Button save_ob_btn;
+    ImageButton camera_imgBtn;
+    ImageView imgView;
+    Uri uri;
+    String path;
+    Button save_ob_btn, back_add_ob_btn;
     String id, name, too, comment, hiker_id, id_p;
     ArrayList<Observation> observations;
     private DatePickerDialog.OnDateSetListener dateSetListener;
@@ -44,6 +59,9 @@ public class AddObservationActivity extends AppCompatActivity {
         name_ob_edt = findViewById(R.id.name_ob_edt);
         comment_ob_edt = findViewById(R.id.comment_ob_edt);
         save_ob_btn = findViewById(R.id.save_ob_btn);
+        back_add_ob_btn = findViewById(R.id.back_add_ob_btn);
+        imgView = findViewById(R.id.imgView);
+        camera_imgBtn = findViewById(R.id.camera_imgBtn);
         myDB = new MyDatabaseHelper(this);
         observations = new ArrayList<>();
         storeDataInArrays();
@@ -69,6 +87,17 @@ public class AddObservationActivity extends AppCompatActivity {
 
         };
 
+        camera_imgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(AddObservationActivity.this)
+                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(300, 300)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
+            }
+        });
+
         save_ob_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +106,7 @@ public class AddObservationActivity extends AppCompatActivity {
                 too = too_control.getText().toString().trim();
                 comment = comment_ob_edt.getText().toString().trim();
                 hiker_id = id_p;
+
 
 
 
@@ -95,8 +125,21 @@ public class AddObservationActivity extends AppCompatActivity {
             }
         });
 
+        back_add_ob_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        uri = data.getData();
+        imgView.setImageURI(uri);
     }
 
     public void displayFillAll(){
@@ -130,13 +173,8 @@ public class AddObservationActivity extends AppCompatActivity {
 
     void getAndSetIntentData() {
         if (getIntent().hasExtra("id")) {
-
             // Geting Data from Intent
             id_p = getIntent().getStringExtra("id");
-
-
-
-
         }else {
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }

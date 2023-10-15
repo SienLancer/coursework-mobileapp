@@ -57,7 +57,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         String query_ob =
                 "CREATE TABLE " + TABLE_NAME_OB +
-                        " (" + COLUMN_OID + " INTEGER PRIMARY KEY, " +
+                        " (" + COLUMN_OID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_ONAME + " TEXT, " +
                         COLUMN_OCOMMENT + " TEXT, " +
                         COLUMN_TOO + " TEXT, " +
