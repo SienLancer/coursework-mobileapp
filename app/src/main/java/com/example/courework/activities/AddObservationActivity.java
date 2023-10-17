@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -43,10 +44,10 @@ public class AddObservationActivity extends AppCompatActivity {
     EditText name_ob_edt, comment_ob_edt;
     ImageButton camera_imgBtn;
     ImageView imgView;
-    Uri uri;
-    String path;
+    Uri imgFilePath;
+    Bitmap imgToStore;
     Button save_ob_btn, back_add_ob_btn;
-    String id, name, too, comment, hiker_id, id_p;
+    String id, name, too, comment, hiker_id, id_p, x;
     ArrayList<Observation> observations;
     private DatePickerDialog.OnDateSetListener dateSetListener;
 
@@ -64,7 +65,7 @@ public class AddObservationActivity extends AppCompatActivity {
         camera_imgBtn = findViewById(R.id.camera_imgBtn);
         myDB = new MyDatabaseHelper(this);
         observations = new ArrayList<>();
-        storeDataInArrays();
+        //storeDataInArrays();
         getAndSetIntentData();
         too_control.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,17 +109,15 @@ public class AddObservationActivity extends AppCompatActivity {
                 hiker_id = id_p;
 
 
-
-
-
-
                 if (name.matches("")) {
                     displayFillAll();
                 } else if (too.matches("Click here to select the time of observation")) {
                     displayFillAll();
+                }else if (imgView.getDrawable() == null && imgToStore == null) {
+                    displayFillAll();
                 } else {
 
-                    myDB.addObservation(new Observation(id, name, too, comment, hiker_id ));
+                    myDB.addObservation(new Observation(id, name, too, comment, imgToStore, hiker_id ));
                     Intent intent = new Intent(AddObservationActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
@@ -138,9 +137,19 @@ public class AddObservationActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        uri = data.getData();
-        imgView.setImageURI(uri);
+
+        try {
+            imgFilePath = data.getData();
+            imgToStore= MediaStore.Images.Media.getBitmap(getContentResolver(), imgFilePath);
+            imgView.setImageBitmap(imgToStore);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
     }
+
 
     public void displayFillAll(){
         new AlertDialog.Builder(this)
@@ -154,22 +163,6 @@ public class AddObservationActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void storeDataInArrays() {
-        Cursor cursor = myDB.readAllDataOb();
-        if (cursor.getCount() == 0) {
-            Toast.makeText(this, "NO DATA", Toast.LENGTH_SHORT).show();
-        } else {
-            while (cursor.moveToNext()) {
-                String id = cursor.getString(0);
-                String name = cursor.getString(1);
-                String too = cursor.getString(2);
-                String comment = cursor.getString(3);
-                String hiker_id = cursor.getString(4);
-                Observation observation = new Observation(id, name, too, comment, hiker_id);
-                observations.add(observation);
-            }
-        }
-    }
 
     void getAndSetIntentData() {
         if (getIntent().hasExtra("id")) {

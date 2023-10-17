@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,9 +28,9 @@ public class ObservationActivity extends AppCompatActivity {
     FloatingActionButton add_fab;
     MyDatabaseHelper myDB;
     RecyclerView ob_rv;
+    Uri uri;
     ObservationAdapter observationAdapter;
     ArrayList<Observation> observations;
-    String o_id, o_name, too, comment, hiker_id;
     String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +91,10 @@ public class ObservationActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void storeDataInArrays() {
         Cursor cursor = myDB.readAllDataOb();
+
+
         if (cursor.getCount() == 0) {
             Toast.makeText(this, "NO DATA", Toast.LENGTH_SHORT).show();
         } else {
@@ -99,10 +103,13 @@ public class ObservationActivity extends AppCompatActivity {
                 String name = cursor.getString(1);
                 String too = cursor.getString(2);
                 String comment = cursor.getString(3);
-                String hiker_id = cursor.getString(4);
-                Observation observation = new Observation(id, name, too, comment, hiker_id);
+                byte[] img = cursor.getBlob(4);
+                String hiker_id = cursor.getString(5);
+                Bitmap obBitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+                Observation observation = new Observation(id, name, too, comment, obBitmap , hiker_id);
                 observations.add(observation);
             }
         }
     }
+
 }

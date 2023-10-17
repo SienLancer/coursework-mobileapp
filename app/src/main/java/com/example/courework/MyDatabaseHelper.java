@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -12,8 +13,14 @@ import androidx.annotation.Nullable;
 import com.example.courework.models.Hiker;
 import com.example.courework.models.Observation;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
+    private ByteArrayOutputStream byteArrayOutputStream;
+    private byte[] imgByte;
     private static final String DATABASE_NAME = "Hiker.db";
     private static final int DATABASE_VERSION = 1;
 
@@ -33,7 +40,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ONAME = "o_name";
     private static final String COLUMN_TOO = "time_of_ob";
     private static final String COLUMN_OCOMMENT = "o_comment";
+    private static final String COLUMN_IMAGE = "image";
     private static final String COLUMN_HIKER_ID = "hiker_id";
+
 
 
     public MyDatabaseHelper(@Nullable Context context) {
@@ -59,13 +68,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 "CREATE TABLE " + TABLE_NAME_OB +
                         " (" + COLUMN_OID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_ONAME + " TEXT, " +
-                        COLUMN_OCOMMENT + " TEXT, " +
                         COLUMN_TOO + " TEXT, " +
+                        COLUMN_OCOMMENT + " TEXT, " +
+                        COLUMN_IMAGE + " BLOB, " +
                         COLUMN_HIKER_ID + " TEXT, " +
                         " FOREIGN KEY ("+COLUMN_HIKER_ID+") REFERENCES "+TABLE_NAME_HIKER+"("+COLUMN_ID+"));";
-        db.execSQL(query_hiker);
-        db.execSQL(query_ob);
 
+        try {
+            db.execSQL(query_hiker);
+            db.execSQL(query_ob);
+            Toast.makeText(context, "Table created successfully!", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(context, "Table created failed!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -144,20 +159,33 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     //============================================OBSERVATION==========================================================
 
     public void addObservation(Observation observation){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_OID, observation.getId());
-        cv.put(COLUMN_ONAME, observation.getName());
-        cv.put(COLUMN_TOO, observation.getTimeOfOb());
-        cv.put(COLUMN_OCOMMENT, observation.getComment());
-        cv.put(COLUMN_HIKER_ID, observation.getHiker_id());
 
-        long result = db.insert(TABLE_NAME_OB,null, cv);
-        if(result == -1){
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            Bitmap imgToStoreBitmap = observation.getImage();
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            imgToStoreBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            imgByte = byteArrayOutputStream.toByteArray();
+
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_OID, observation.getId());
+            cv.put(COLUMN_ONAME, observation.getName());
+            cv.put(COLUMN_TOO, observation.getTimeOfOb());
+            cv.put(COLUMN_OCOMMENT, observation.getComment());
+            cv.put(COLUMN_IMAGE, imgByte);
+            cv.put(COLUMN_HIKER_ID, observation.getHiker_id());
+            long result = db.insert(TABLE_NAME_OB,null, cv);
+            if(result == -1){
+                Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+            }
+
+        }catch (Exception e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public Cursor readAllDataOb(){

@@ -1,5 +1,6 @@
 package com.example.courework.models;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 public class Observation {
@@ -7,15 +8,25 @@ public class Observation {
     private String name;
     private String timeOfOb;
     private String comment;
+    private Bitmap image;
     private String hiker_id;
 
-
-    public Observation(String id, String name, String timeOfOb, String comment, String hiker_id) {
+    public Observation(String id, String name, String timeOfOb, String comment, Bitmap image, String hiker_id) {
         this.id = id;
         this.name = name;
         this.timeOfOb = timeOfOb;
         this.comment = comment;
+        this.image = image;
         this.hiker_id = hiker_id;
+    }
+
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
     public String getTimeOfOb() {

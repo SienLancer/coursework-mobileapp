@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.
         holder.id_row_ob_txt.setText("ID: "+observation.getHiker_id());
         holder.name_ob_row_txt.setText("Name: "+observation.getName());
         holder.too_ob_txt.setText("Time of observation: "+observation.getTimeOfOb());
+        holder.imageView_ob.setImageBitmap(observation.getImage());
 
 
     }
@@ -58,6 +60,7 @@ public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name_ob_row_txt, too_ob_txt, id_row_ob_txt;
+        ImageView imageView_ob;
         Button delete_btn_ob_row, update_btn_ob;
         LinearLayout mainLayout_ob;
         public MyViewHolder(@NonNull View itemView) {
@@ -67,6 +70,7 @@ public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.
             update_btn_ob = itemView.findViewById(R.id.update_btn_ob);
             delete_btn_ob_row = itemView.findViewById(R.id.delete_btn_ob_row);
             id_row_ob_txt = itemView.findViewById(R.id.id_row_ob_txt);
+            imageView_ob = itemView.findViewById(R.id.imageView_ob);
             mainLayout_ob = itemView.findViewById(R.id.mainLayout_ob);
         }
     }
