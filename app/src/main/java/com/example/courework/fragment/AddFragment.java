@@ -89,7 +89,6 @@ public class AddFragment extends Fragment {
 
         myDB = new MyDatabaseHelper(getActivity());
         hikers =new ArrayList<>();
-        storeDataInArrays();
         length_edt.setText("0");
         save_btn.setOnClickListener(view -> {
             name = name_edt.getText().toString().trim();
@@ -161,25 +160,7 @@ public class AddFragment extends Fragment {
                 .show();
     }
 
-    private void storeDataInArrays() {
-        Cursor cursor = myDB.readAllDataHiker();
-        if (cursor.getCount() == 0) {
-            Toast.makeText(getActivity(), "NO DATA", Toast.LENGTH_SHORT).show();
-        } else {
-            while (cursor.moveToNext()) {
-                String id = cursor.getString(0);
-                String name = cursor.getString(1);
-                String location = cursor.getString(2);
-                String doh = cursor.getString(3);
-                String parking = cursor.getString(4);
-                int length = cursor.getInt(5);
-                String level = cursor.getString(6);
-                String des = cursor.getString(7);
-                Hiker hiker = new Hiker(id, name, location, doh, parking, length, level, des);
-                hikers.add(hiker);
-            }
-        }
-    }
+
 
 
 }

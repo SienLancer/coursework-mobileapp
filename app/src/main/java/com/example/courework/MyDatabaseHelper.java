@@ -200,24 +200,35 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void updateDataOb(Observation observation){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_OID, observation.getId());
-        cv.put(COLUMN_ONAME, observation.getName());
-        cv.put(COLUMN_OCOMMENT, observation.getComment());
-        cv.put(COLUMN_HIKER_ID, observation.getHiker_id());
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            Bitmap imgToStoreBitmap = observation.getImage();
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            imgToStoreBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            imgByte = byteArrayOutputStream.toByteArray();
 
-        long result = db.update(TABLE_NAME_OB, cv, "_id=?", new String[]{observation.getId()});
-        if (result == -1){
-            Toast.makeText(context, "Failed to update.", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(context, "Successfully Updated.", Toast.LENGTH_SHORT).show();
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_OID, observation.getId());
+            cv.put(COLUMN_ONAME, observation.getName());
+            cv.put(COLUMN_TOO, observation.getTimeOfOb());
+            cv.put(COLUMN_OCOMMENT, observation.getComment());
+            cv.put(COLUMN_IMAGE, imgByte);
+            cv.put(COLUMN_HIKER_ID, observation.getHiker_id());
+
+            long result = db.update(TABLE_NAME_OB, cv, "o_id=?", new String[]{observation.getId()});
+            if (result == -1){
+                Toast.makeText(context, "Failed to update.", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(context, "Successfully Updated.", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     public void deleteOneRowOb(String row_id){
         SQLiteDatabase db = getWritableDatabase();
-        long result = db.delete(TABLE_NAME_OB, "_id=?", new String[]{row_id});
+        long result = db.delete(TABLE_NAME_OB, "o_id=?", new String[]{row_id});
         if (result == -1){
             Toast.makeText(context, "Failed to delete.", Toast.LENGTH_SHORT).show();
         }else {

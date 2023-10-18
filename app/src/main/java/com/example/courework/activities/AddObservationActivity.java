@@ -47,8 +47,7 @@ public class AddObservationActivity extends AppCompatActivity {
     Uri imgFilePath;
     Bitmap imgToStore;
     Button save_ob_btn, back_add_ob_btn;
-    String id, name, too, comment, hiker_id, id_p, x;
-    ArrayList<Observation> observations;
+    String id, name, too, comment, hiker_id, id_p;
     private DatePickerDialog.OnDateSetListener dateSetListener;
 
     @Override
@@ -64,8 +63,6 @@ public class AddObservationActivity extends AppCompatActivity {
         imgView = findViewById(R.id.imgView);
         camera_imgBtn = findViewById(R.id.camera_imgBtn);
         myDB = new MyDatabaseHelper(this);
-        observations = new ArrayList<>();
-        //storeDataInArrays();
         getAndSetIntentData();
         too_control.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +115,7 @@ public class AddObservationActivity extends AppCompatActivity {
                 } else {
 
                     myDB.addObservation(new Observation(id, name, too, comment, imgToStore, hiker_id ));
-                    Intent intent = new Intent(AddObservationActivity.this, MainActivity.class);
+                    Intent intent = new Intent(AddObservationActivity.this, ObservationActivity.class);
                     startActivity(intent);
                 }
             }
