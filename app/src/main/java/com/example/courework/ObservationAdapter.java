@@ -12,16 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.courework.activities.MainActivity;
-import com.example.courework.activities.ObservationActivity;
-import com.example.courework.activities.UpdateActivity;
 import com.example.courework.activities.UpdateObservationActivity;
-import com.example.courework.models.Hiker;
 import com.example.courework.models.Observation;
 
 import java.util.ArrayList;
@@ -49,9 +45,9 @@ public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Observation observation =observations.get(position);
-        holder.id_row_ob_txt.setText("ID: "+observation.getId());
+        holder.cmt_row_ob_txt.setText("Comment: "+observation.getComment());
         holder.name_ob_row_txt.setText("Name: "+observation.getName());
-        holder.too_ob_txt.setText("Time of observation: "+observation.getTimeOfOb());
+        holder.too_ob_txt.setText("Time: \n"+observation.getTimeOfOb());
         holder.imageView_ob.setImageBitmap(observation.getImage());
 
         holder.update_btn_ob.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +106,7 @@ public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name_ob_row_txt, too_ob_txt, id_row_ob_txt;
+        TextView name_ob_row_txt, too_ob_txt, cmt_row_ob_txt;
         ImageView imageView_ob;
         Button delete_btn_ob_row, update_btn_ob;
         LinearLayout mainLayout_ob;
@@ -120,7 +116,7 @@ public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.
             too_ob_txt = itemView.findViewById(R.id.too_row_txt);
             update_btn_ob = itemView.findViewById(R.id.update_btn_ob);
             delete_btn_ob_row = itemView.findViewById(R.id.delete_btn_ob_row);
-            id_row_ob_txt = itemView.findViewById(R.id.id_row_ob_txt);
+            cmt_row_ob_txt = itemView.findViewById(R.id.comment_row_ob_txt);
             imageView_ob = itemView.findViewById(R.id.imageView_ob);
             mainLayout_ob = itemView.findViewById(R.id.mainLayout_ob);
         }

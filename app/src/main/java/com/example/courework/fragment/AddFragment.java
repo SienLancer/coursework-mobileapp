@@ -5,7 +5,6 @@ import static android.content.ContentValues.TAG;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,7 +21,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.courework.models.Hiker;
 import com.example.courework.activities.MainActivity;
@@ -76,15 +74,15 @@ public class AddFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_add, container, false);
-        name_edt = mView.findViewById(R.id.name_ob_edt);
+        name_edt = mView.findViewById(R.id.name_edt);
         location_edt = mView.findViewById(R.id.location_edt);
-        doh_control = mView.findViewById(R.id.too_control);
+        doh_control = mView.findViewById(R.id.doh_control);
         rg = mView.findViewById(R.id.rg);
         length_edt = mView.findViewById(R.id.length_edt);
-        des_edt = mView.findViewById(R.id.comment_ob_edt);
+        des_edt = mView.findViewById(R.id.des_edt);
         yes_rb = mView.findViewById(R.id.yes_rb);
         no_rb = mView.findViewById(R.id.no_rb);
-        save_btn = mView.findViewById(R.id.save_ob_btn);
+        save_btn = mView.findViewById(R.id.save_btn);
         level_spinner = mView.findViewById(R.id.level_spinner);
 
         myDB = new MyDatabaseHelper(getActivity());

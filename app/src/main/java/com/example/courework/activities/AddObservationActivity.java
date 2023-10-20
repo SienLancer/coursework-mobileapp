@@ -5,12 +5,9 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,20 +18,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
-import com.example.courework.models.Hiker;
 import com.example.courework.models.Observation;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 public class AddObservationActivity extends AppCompatActivity {
@@ -91,7 +84,7 @@ public class AddObservationActivity extends AppCompatActivity {
                 ImagePicker.with(AddObservationActivity.this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(300, 300)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .maxResultSize(480, 480)	//Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
             }
         });
@@ -115,7 +108,7 @@ public class AddObservationActivity extends AppCompatActivity {
                 } else {
 
                     myDB.addObservation(new Observation(id, name, too, comment, imgToStore, hiker_id ));
-                    Intent intent = new Intent(AddObservationActivity.this, ObservationActivity.class);
+                    Intent intent = new Intent(AddObservationActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }

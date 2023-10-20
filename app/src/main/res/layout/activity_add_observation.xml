@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F393"
     android:orientation="vertical"
     tools:context=".activities.AddObservationActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayoutTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutTitle"
+        android:background="@drawable/title_bg"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,16 +22,19 @@
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/back_ic" />
+            android:background="@drawable/back_ic"
+            android:backgroundTint="#FFFFFF" />
 
         <TextView
             android:id="@+id/Title_Ob_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/knewave"
             android:paddingVertical="10dp"
-            android:paddingRight="50dp"
+            android:paddingRight="20dp"
             android:text="Add new Observation"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -52,8 +55,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Name of the hike"
-            android:textSize="16sp" />
+            android:text="Observation"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/name_ob_edt"
@@ -82,8 +87,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Date of the hike"
-            android:textSize="16sp" />
+            android:text="Time of observation"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/too_control"
@@ -110,12 +117,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Description" />
+            android:text="Comments"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/comment_ob_edt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:background="@drawable/edt_bg"
             android:gravity="top|start"
             android:inputType="textMultiLine"
@@ -130,20 +140,25 @@
         android:id="@+id/save_ob_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/edt_bg"
+        android:background="@drawable/button_bg"
+        android:fontFamily="@font/knewave"
         android:text="ADD"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgView" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_imgBtn" />
 
     <ImageButton
         android:id="@+id/camera_imgBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/soyyin"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/frame_bg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutComment"
         app:srcCompat="@drawable/icons_camera" />
@@ -152,11 +167,11 @@
         android:id="@+id/imgView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="57dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera_imgBtn"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutComment"
         tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

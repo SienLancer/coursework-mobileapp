@@ -84,7 +84,7 @@ public class UpdateObservationActivity extends AppCompatActivity {
                 ImagePicker.with(UpdateObservationActivity.this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(300, 300)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .maxResultSize(480, 480)	//Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
             }
         });

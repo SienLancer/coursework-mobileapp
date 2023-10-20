@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F393"
     android:orientation="vertical"
-    tools:context=".fragment.AddFragment">
+    tools:context=".activities.UpdateActivity">
 
     <LinearLayout
         android:id="@+id/linearLayoutTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@drawable/title_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,28 +22,34 @@
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/back_ic" />
+            android:background="@drawable/back_ic"
+            android:backgroundTint="#FFFFFF" />
 
         <TextView
             android:id="@+id/Title_txt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/knewave"
             android:paddingVertical="10dp"
-            android:paddingRight="50dp"
+            android:paddingRight="30dp"
             android:text="Update Information"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lnLayout_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
         android:paddingHorizontal="15dp"
-        android:layout_marginBottom="15dp"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutTitle">
 
         <TextView
             android:id="@+id/name_txt_up"
@@ -51,25 +57,31 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="Name of the hike"
-            android:textSize="16sp" />
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/name_edt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="7dp"
-            android:hint=""
             android:background="@drawable/edt_bg"
             android:ems="10"
-            android:inputType="text" />
+            android:hint=""
+            android:inputType="text"
+            android:padding="7dp" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lnLayout_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
         android:paddingHorizontal="15dp"
-        android:layout_marginBottom="15dp"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lnLayout_name">
 
         <TextView
             android:id="@+id/location_txt_up"
@@ -77,26 +89,31 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="Location"
-            android:textSize="16sp" />
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/location_edt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="7dp"
-            android:hint=""
             android:background="@drawable/edt_bg"
             android:ems="10"
-            android:inputType="text" />
+            android:hint=""
+            android:inputType="text"
+            android:padding="7dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayoutDoh_up"
+        android:id="@+id/linearLayoutDoh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
         android:paddingHorizontal="15dp"
-        android:layout_marginBottom="15dp"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lnLayout_location">
 
         <TextView
             android:id="@+id/doh_txt_up"
@@ -104,23 +121,30 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:text="Date of the hike"
-            android:textSize="16sp" />
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/doh_control_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="7dp"
             android:background="@drawable/edt_bg"
+            android:padding="7dp"
             android:text="Click here to select the date of the hike" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lnLayout_parking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="15dp"
         android:layout_marginVertical="15dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutDoh">
 
         <TextView
             android:id="@+id/parking_txt_up"
@@ -128,7 +152,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Parking available"
-            android:textSize="16sp" />
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/rg_up"
@@ -142,31 +168,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Yes" />
+                android:buttonTint="@color/green"
+                android:text="Yes"
+                android:textColor="#000000" />
 
             <RadioButton
                 android:id="@+id/no_rb_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:buttonTint="@color/green"
                 android:layout_weight="1"
-                android:text="No" />
+                android:text="No"
+                android:textColor="#0C0C0C" />
         </RadioGroup>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lnLayout_length"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         android:paddingHorizontal="15dp"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lnLayout_parking">
 
         <TextView
             android:id="@+id/length_txt_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="Length of the hike"
+            android:textColor="#000000"
             android:textSize="16sp"
-            android:text="Length of the hike" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/length_edt_up"
@@ -181,19 +217,25 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lnLayout_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         android:paddingHorizontal="15dp"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lnLayout_length">
 
         <TextView
             android:id="@+id/level_txt_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="Difficulty level"
+            android:textColor="#000000"
             android:textSize="16sp"
-            android:text="Difficulty level" />
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/level_spinner_up"
@@ -207,30 +249,37 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/lnLayout_cmt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:paddingHorizontal="15dp">
+        android:paddingHorizontal="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lnLayout_level">
 
         <TextView
             android:id="@+id/des_txt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Description" />
+            android:text="Description"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/des_edt_up"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:layout_height="120dp"
+            android:background="@drawable/edt_bg"
+            android:gravity="top|start"
             android:inputType="textMultiLine"
             android:lines="8"
-            android:minLines="6"
-            android:gravity="top|start"
             android:maxLines="10"
-            android:background="@drawable/edt_bg" />
+            android:minLines="6"
+            android:padding="5dp" />
 
     </LinearLayout>
 
@@ -238,9 +287,15 @@
         android:id="@+id/update_btn_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/edt_bg"
-        android:layout_marginTop="20dp"
-        android:text="UPDATE" />
+        android:background="@drawable/button_bg"
+        android:fontFamily="@font/knewave"
+        android:text="ADD"
+        android:textColor="#FAFAFA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnLayout_cmt"
+        app:layout_constraintVertical_bias="0.38" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
