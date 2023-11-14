@@ -10,12 +10,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.courework.models.Hiker;
+import com.example.courework.models.Hike;
 import com.example.courework.models.Observation;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
@@ -92,17 +90,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
     //===============================================HIKER======================================================
-    public void addHiker(Hiker hiker){
+    public void addHike(Hike hike){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_ID, hiker.getId());
-        cv.put(COLUMN_NAME, hiker.getName());
-        cv.put(COLUMN_LOCATION, hiker.getLocation());
-        cv.put(COLUMN_DOH, hiker.getDoh());
-        cv.put(COLUMN_PARKING, hiker.getParking());
-        cv.put(COLUMN_LENGTH, hiker.getLength());
-        cv.put(COLUMN_LEVEL, hiker.getLevel());
-        cv.put(COLUMN_DESCRIPTION, hiker.getDescription());
+        cv.put(COLUMN_ID, hike.getId());
+        cv.put(COLUMN_NAME, hike.getName());
+        cv.put(COLUMN_LOCATION, hike.getLocation());
+        cv.put(COLUMN_DOH, hike.getDoh());
+        cv.put(COLUMN_PARKING, hike.getParking());
+        cv.put(COLUMN_LENGTH, hike.getLength());
+        cv.put(COLUMN_LEVEL, hike.getLevel());
+        cv.put(COLUMN_DESCRIPTION, hike.getDescription());
         long result = db.insert(TABLE_NAME_HIKER,null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -111,7 +109,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor readAllDataHiker(){
+    public Cursor readAllDataHike(){
         String query = "SELECT * FROM " + TABLE_NAME_HIKER;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -122,17 +120,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void updateDataHiker(Hiker hiker){
+    public void updateDataHike(Hike hike){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_NAME, hiker.getName());
-        cv.put(COLUMN_LOCATION, hiker.getLocation());
-        cv.put(COLUMN_DOH, hiker.getDoh());
-        cv.put(COLUMN_PARKING, hiker.getParking());
-        cv.put(COLUMN_LENGTH, hiker.getLength());
-        cv.put(COLUMN_LEVEL, hiker.getLevel());
-        cv.put(COLUMN_DESCRIPTION, hiker.getDescription());
-        long result = db.update(TABLE_NAME_HIKER, cv, "_id=?", new String[]{hiker.getId()});
+        cv.put(COLUMN_NAME, hike.getName());
+        cv.put(COLUMN_LOCATION, hike.getLocation());
+        cv.put(COLUMN_DOH, hike.getDoh());
+        cv.put(COLUMN_PARKING, hike.getParking());
+        cv.put(COLUMN_LENGTH, hike.getLength());
+        cv.put(COLUMN_LEVEL, hike.getLevel());
+        cv.put(COLUMN_DESCRIPTION, hike.getDescription());
+        long result = db.update(TABLE_NAME_HIKER, cv, "_id=?", new String[]{hike.getId()});
         if (result == -1){
             Toast.makeText(context, "Failed to update.", Toast.LENGTH_SHORT).show();
         }else {
@@ -140,7 +138,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteOneRowHiker(String row_id){
+    public void deleteOneRowHike(String row_id){
         SQLiteDatabase db = getWritableDatabase();
         long result = db.delete(TABLE_NAME_HIKER, "_id=?", new String[]{row_id});
         if (result == -1){
@@ -150,7 +148,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteAllDataHiker(){
+    public void deleteAllDataHike(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME_HIKER);
     }

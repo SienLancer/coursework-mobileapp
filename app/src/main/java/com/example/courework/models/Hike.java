@@ -1,6 +1,6 @@
 package com.example.courework.models;
 
-public class Hiker {
+public class Hike {
     private String id;
     private String name;
     private String location;
@@ -10,7 +10,7 @@ public class Hiker {
     private String level;
     private String description;
 
-    public Hiker(String id, String name, String location, String doh, String parking, int length, String level, String description) {
+    public Hike(String id, String name, String location, String doh, String parking, int length, String level, String description) {
         this.id = id;
         this.name = name;
         this.location = location;

@@ -17,7 +17,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.courework.CustomAdapter;
-import com.example.courework.models.Hiker;
+import com.example.courework.models.Hike;
 import com.example.courework.activities.MainActivity;
 import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     MyDatabaseHelper myDB;
     SearchView name_sv;
 
-    ArrayList<Hiker> hikers;
+    ArrayList<Hike> hikes;
     CustomAdapter customAdapter;
 
 
@@ -62,11 +62,11 @@ public class HomeFragment extends Fragment {
         delAll_fab = mView.findViewById(R.id.deleteAll_fab);
         name_sv = mView.findViewById(R.id.name_sv);
         myDB = new MyDatabaseHelper(getActivity());
-        hikers = new ArrayList<>();
+        hikes = new ArrayList<>();
 
         storeDataInArrays();
 
-        customAdapter = new CustomAdapter(getActivity(), hikers);
+        customAdapter = new CustomAdapter(getActivity(), hikes);
         rv.setAdapter(customAdapter);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void storeDataInArrays() {
-        Cursor cursor = myDB.readAllDataHiker();
+        Cursor cursor = myDB.readAllDataHike();
         if (cursor.getCount() == 0) {
             Toast.makeText(getActivity(), "NO DATA", Toast.LENGTH_SHORT).show();
         } else {
@@ -105,21 +105,21 @@ public class HomeFragment extends Fragment {
                 int length = cursor.getInt(5);
                 String level = cursor.getString(6);
                 String des = cursor.getString(7);
-                Hiker hiker = new Hiker(id, name, location, doh, parking, length, level, des);
-                hikers.add(hiker);
+                Hike hike = new Hike(id, name, location, doh, parking, length, level, des);
+                hikes.add(hike);
             }
         }
     }
 
     void confirmDialogForAll(){
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Xóa mẹ hết cho rồi");
-        builder.setMessage("Mày muốn xóa toàn bộ lịch sử sao?");
+        builder.setTitle("Delete all");
+        builder.setMessage("Do you want to delete all the information in the list?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(getActivity());
-                myDB.deleteAllDataHiker();
+                myDB.deleteAllDataHike();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }

@@ -11,14 +11,13 @@
         android:id="@+id/Title_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/title_bg"
         android:fontFamily="@font/knewave"
         android:paddingVertical="10dp"
         android:text="Add new hike"
         android:textAlignment="center"
-        android:background="@drawable/title_bg"
         android:textColor="#FFFFFF"
-        android:textSize="34sp"
-        android:textStyle="bold"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,10 +37,10 @@
             android:id="@+id/name_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/kodchasan"
             android:text="Name of the hike"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -49,10 +48,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edt_bg"
-            android:ems="10"
             android:hint=""
             android:inputType="text"
-            android:padding="7dp" />
+            android:padding="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -70,10 +68,10 @@
             android:id="@+id/location_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Location"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -82,9 +80,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edt_bg"
             android:ems="10"
-            android:hint=""
             android:inputType="text"
-            android:padding="7dp" />
+            android:padding="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -102,10 +99,10 @@
             android:id="@+id/doh_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Date of the hike"
+            android:fontFamily="@font/kodchasan"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -114,6 +111,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edt_bg"
             android:padding="7dp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="12sp"
             android:text="Click here to select the date of the hike" />
     </LinearLayout>
 
@@ -135,8 +134,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Parking available"
+            android:fontFamily="@font/kodchasan"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -144,6 +144,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingLeft="30dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -152,7 +153,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/green"
+                android:fontFamily="@font/kodchasan"
                 android:text="Yes"
+                android:textSize="12sp"
                 android:textColor="#000000" />
 
             <RadioButton
@@ -162,7 +165,8 @@
                 android:buttonTint="@color/green"
                 android:layout_weight="1"
                 android:text="No"
-                android:textColor="#0C0C0C" />
+                android:fontFamily="@font/kodchasan"
+                android:textColor="#000000" />
         </RadioGroup>
     </LinearLayout>
 
@@ -183,19 +187,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Length of the hike"
+            android:fontFamily="@font/kodchasan"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/length_edt"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/kodchasan"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/edt_bg"
             android:hint="Km"
             android:inputType="number|numberDecimal"
-            android:padding="5dp"
+            android:paddingHorizontal="5dp"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -217,13 +223,15 @@
             android:layout_weight="1"
             android:text="Difficulty level"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/level_spinner"
             android:layout_width="10dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/kodchasan"
             android:layout_weight="1"
             android:background="@drawable/edt_bg"
             android:entries="@array/workStatus"
@@ -246,10 +254,10 @@
             android:id="@+id/des_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Description"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -262,7 +270,7 @@
             android:lines="8"
             android:maxLines="10"
             android:minLines="6"
-            android:padding="5dp" />
+            android:padding="10dp" />
 
     </LinearLayout>
 

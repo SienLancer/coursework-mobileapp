@@ -21,6 +21,9 @@
         android:theme="@style/Theme.Courework"
         tools:targetApi="31">
         <activity
+            android:name=".activities.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.UpdateObservationActivity"
             android:exported="false" />
         <activity

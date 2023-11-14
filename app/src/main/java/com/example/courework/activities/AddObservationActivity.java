@@ -145,7 +145,7 @@ public class AddObservationActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Error")
                 .setMessage(
-                        "You need to fill all required fields or fill in the correct email!"
+                        "You need to fill all required fields!"
                 )
                 .setNeutralButton("Close", (dialogInterface, i) -> {
 

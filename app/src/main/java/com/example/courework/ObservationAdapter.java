@@ -45,9 +45,9 @@ public class ObservationAdapter extends RecyclerView.Adapter<ObservationAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Observation observation =observations.get(position);
-        holder.cmt_row_ob_txt.setText("Comment: "+observation.getComment());
-        holder.name_ob_row_txt.setText("Name: "+observation.getName());
-        holder.too_ob_txt.setText("Time: \n"+observation.getTimeOfOb());
+        holder.cmt_row_ob_txt.setText(observation.getComment());
+        holder.name_ob_row_txt.setText(observation.getName());
+        holder.too_ob_txt.setText(observation.getTimeOfOb());
         holder.imageView_ob.setImageBitmap(observation.getImage());
 
         holder.update_btn_ob.setOnClickListener(new View.OnClickListener() {

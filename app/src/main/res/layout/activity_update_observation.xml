@@ -35,8 +35,7 @@
             android:text="Update Observation"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,10 +53,10 @@
             android:id="@+id/name_ob_up_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Observation"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -86,10 +85,10 @@
             android:id="@+id/too_up_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Time of observation"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -98,6 +97,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edt_bg"
             android:padding="7dp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="12sp"
             android:text="Click here to select the time of observation" />
     </LinearLayout>
 
@@ -116,16 +117,16 @@
             android:id="@+id/comment_up_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Comments"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/comment_ob_up_edt"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:background="@drawable/edt_bg"
             android:gravity="top|start"
             android:inputType="textMultiLine"
@@ -136,42 +137,59 @@
 
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/img_frame_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/frame_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCommentUp">
+
+        <ImageView
+            android:id="@+id/imgView_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/camera_up_imgBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/frame_bg_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_frame_up"
+        app:srcCompat="@drawable/icons_camera" />
+
+
     <Button
         android:id="@+id/save_ob_up_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_bg"
         android:fontFamily="@font/knewave"
-        android:text="Save"
+        android:text="SAVE"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera_up_imgBtn" />
-
-    <ImageButton
-        android:id="@+id/camera_up_imgBtn"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/frame_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCommentUp"
-        app:srcCompat="@drawable/icons_camera" />
-
-    <ImageView
-        android:id="@+id/imgView_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCommentUp"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_up_imgBtn"
+        app:layout_constraintVertical_bias="0.474" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

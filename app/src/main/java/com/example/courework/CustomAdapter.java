@@ -2,41 +2,39 @@ package com.example.courework;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.courework.activities.DetailActivity;
 import com.example.courework.activities.MainActivity;
 import com.example.courework.activities.ObservationActivity;
 import com.example.courework.activities.UpdateActivity;
-import com.example.courework.models.Hiker;
+import com.example.courework.models.Hike;
 
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> implements Filterable {
 
     private Context context;
-    ArrayList<Hiker> hikers;
-    ArrayList<Hiker> hikersSearch;
+    ArrayList<Hike> hikes;
+    ArrayList<Hike> hikersSearches;
 
-    public CustomAdapter(Context context, ArrayList<Hiker> hikers) {
+    public CustomAdapter(Context context, ArrayList<Hike> hikes) {
         this.context = context;
-        this.hikers = hikers;
-        this.hikersSearch = hikers;
+        this.hikes = hikes;
+        this.hikersSearches = hikes;
     }
 
     @NonNull
@@ -49,49 +47,56 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Hiker hiker =hikers.get(position);
-        holder.nameR_txt.setText("Name: "+hiker.getName());
-        holder.locationR_txt.setText("Location: "+hiker.getLocation());
-        holder.dohR_txt.setText("Date of the hike: "+hiker.getDoh());
-        String uri = "@drawable/logo_app";  // where myresource (without the extension) is the file
+        Hike hike = hikes.get(position);
+        holder.nameR_txt.setText(hike.getName());
+        holder.locationR_txt.setText(hike.getLocation());
+        holder.dohR_txt.setText(hike.getDoh());
 
-        int imageResource = context.getResources().getIdentifier(uri, null, context.getPackageName());
-
-        Drawable res = context.getResources().getDrawable(imageResource);
-        holder.imgView_ava.setImageDrawable(res);
-        holder.mainLayout.setOnClickListener(view -> displayNextAlert(hiker.getName(), hiker.getLocation(), hiker.getDoh(),
-                hiker.getParking(), hiker.getLength(), hiker.getLevel(), hiker.getDescription()));
-
-        holder.delete_btn_one.setOnClickListener(view -> {
-            confirmDialogForOne(hiker.getId(), hiker.getName());
-
-        });
-        holder.update_btn_out.setOnClickListener(new View.OnClickListener() {
+        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, UpdateActivity.class);
-                Hiker hiker =hikers.get(position);
-                intent.putExtra("id", hiker.getId());
-                intent.putExtra("name", hiker.getName());
-                intent.putExtra("location", hiker.getLocation());
-                intent.putExtra("doh", hiker.getDoh());
-                intent.putExtra("parking", hiker.getParking());
-                intent.putExtra("length", hiker.getLength());
-                intent.putExtra("level", hiker.getLevel());
-                intent.putExtra("des", hiker.getDescription());
+                Intent intent = new Intent(context, DetailActivity.class);
+                Hike hike1 = hikes.get(position);
+                intent.putExtra("id", hike1.getId());
+                intent.putExtra("name", hike1.getName());
+                intent.putExtra("location", hike1.getLocation());
+                intent.putExtra("doh", hike1.getDoh());
+                intent.putExtra("parking", hike1.getParking());
+                intent.putExtra("length", hike1.getLength());
+                intent.putExtra("level", hike1.getLevel());
+                intent.putExtra("des", hike1.getDescription());
 
                 context.startActivity(intent);
-
-
             }
+        });
+
+        holder.delete_btn_one.setOnClickListener(view -> {
+            confirmDialogForOne(hike.getId(), hike.getName());
+
+        });
+        holder.update_btn_out.setOnClickListener(view -> {
+            Intent intent = new Intent(context, UpdateActivity.class);
+            Hike hike1 = hikes.get(position);
+            intent.putExtra("id", hike1.getId());
+            intent.putExtra("name", hike1.getName());
+            intent.putExtra("location", hike1.getLocation());
+            intent.putExtra("doh", hike1.getDoh());
+            intent.putExtra("parking", hike1.getParking());
+            intent.putExtra("length", hike1.getLength());
+            intent.putExtra("level", hike1.getLevel());
+            intent.putExtra("des", hike1.getDescription());
+
+            context.startActivity(intent);
+
+
         });
 
         holder.more_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ObservationActivity.class);
-                Hiker hiker =hikers.get(position);
-                intent.putExtra("id", hiker.getId());
+                Hike hike = hikes.get(position);
+                intent.putExtra("id", hike.getId());
                 context.startActivity(intent);
             }
         });
@@ -102,7 +107,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return hikers.size();
+        return hikes.size();
     }
 
 
@@ -110,7 +115,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameR_txt, locationR_txt, dohR_txt;
         Button delete_btn_one, update_btn_out, more_btn;
-        ImageView imgView_ava;
         LinearLayout mainLayout;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -120,32 +124,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             delete_btn_one = itemView.findViewById(R.id.delete_btn_row);
             update_btn_out = itemView.findViewById(R.id.update_btn_out);
             more_btn = itemView.findViewById(R.id.more_btn);
-            imgView_ava = itemView.findViewById(R.id.imgView_ava);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }
 
-    public void displayNextAlert(String name, String location, String doh, String parking, int length, String level, String des){
-        new AlertDialog.Builder(context)
-                .setTitle("Details Entered")
-                .setMessage(
-                        "\n" +
-                                "Name: "+name + "\n" +
-                                "Location: "+location + "\n" +
-                                "Date of the hike: "+doh + "\n" +
-                                "Parking available: "+parking + "\n" +
-                                "Length: "+length +"Km"+ "\n" +
-                                "Difficulty level: "+level + "\n" +
-                                "Description: "+des
-                )
-                .setNeutralButton("Back", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                .show();
-    }
 
     void confirmDialogForOne(String id, String name){
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
@@ -155,7 +137,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(context);
-                myDB.deleteOneRowHiker(id);
+                myDB.deleteOneRowHike(id);
                 Intent intent = new Intent(context, MainActivity.class);
                 ((Activity)context).startActivity(intent);
 
@@ -177,28 +159,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String searchText = charSequence.toString();
                 if (searchText.isEmpty()){
-                    hikers = hikersSearch;
+                    hikes = hikersSearches;
                 }else {
-                    ArrayList<Hiker> hl = new ArrayList<>();
-                    for (Hiker hiker : hikersSearch){
-                        if (hiker.getName().toLowerCase().contains(searchText.toLowerCase())){
-                            hl.add(hiker);
+                    ArrayList<Hike> hl = new ArrayList<>();
+                    for (Hike hike : hikersSearches){
+                        if (hike.getName().toLowerCase().contains(searchText.toLowerCase())){
+                            hl.add(hike);
                         }else {
-                            ArrayList<Hiker> emptyList = new ArrayList<>();
-                            hikers = emptyList;
+                            ArrayList<Hike> emptyList = new ArrayList<>();
+                            hikes = emptyList;
                         }
                     }
-                    hikers = hl;
+                    hikes = hl;
                 }
 
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = hikers;
+                filterResults.values = hikes;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                hikers = (ArrayList<Hiker>) filterResults.values;
+                hikes = (ArrayList<Hike>) filterResults.values;
                 notifyDataSetChanged();
             }
         };

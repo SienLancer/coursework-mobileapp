@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.courework.CustomAdapter;
@@ -31,6 +32,7 @@ public class ObservationActivity extends AppCompatActivity {
     Uri uri;
     ObservationAdapter observationAdapter;
     ArrayList<Observation> observations;
+    Button back_btn;
     String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,9 @@ public class ObservationActivity extends AppCompatActivity {
 
         add_fab = findViewById(R.id.add_fab);
         ob_rv = findViewById(R.id.ob_rv);
+        back_btn = findViewById(R.id.back_ob_btn);
 
+        back_btn.setOnClickListener(view -> finish());
 
 
         myDB = new MyDatabaseHelper(this);

@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
-import com.example.courework.models.Hiker;
+import com.example.courework.models.Hike;
 
 import java.util.Calendar;
 
@@ -31,7 +31,7 @@ public class UpdateActivity extends AppCompatActivity {
     RadioButton yes_rb_up, no_rb_up;
     Spinner level_spinner_up;
     Button update_btn_in, back_btn;
-    String id, name, location, doh, des, level, parking, oId_m;
+    String id, name, location, doh, des, level, parking;
     int length;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     @Override
@@ -83,7 +83,7 @@ public class UpdateActivity extends AppCompatActivity {
                     RadioButton rb = findViewById(id_btn);
                     parking = rb.getText().toString();
 
-                    myDB.updateDataHiker(new Hiker(id, name, location, doh, parking, length, level, des));
+                    myDB.updateDataHike(new Hike(id, name, location, doh, parking, length, level, des));
                     Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
                     startActivity(intent);
                 }

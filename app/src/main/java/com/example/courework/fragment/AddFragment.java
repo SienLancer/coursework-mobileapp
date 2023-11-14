@@ -22,7 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.courework.models.Hiker;
+import com.example.courework.models.Hike;
 import com.example.courework.activities.MainActivity;
 import com.example.courework.MyDatabaseHelper;
 import com.example.courework.R;
@@ -44,7 +44,7 @@ public class AddFragment extends Fragment {
     String id, name, location, doh, des, level, parking;
     int length;
     MyDatabaseHelper myDB;
-    ArrayList<Hiker> hikers;
+    ArrayList<Hike> hikes;
     public AddFragment() {
         // Required empty public constructor
     }
@@ -86,7 +86,7 @@ public class AddFragment extends Fragment {
         level_spinner = mView.findViewById(R.id.level_spinner);
 
         myDB = new MyDatabaseHelper(getActivity());
-        hikers =new ArrayList<>();
+        hikes =new ArrayList<>();
         length_edt.setText("0");
         save_btn.setOnClickListener(view -> {
             name = name_edt.getText().toString().trim();
@@ -115,7 +115,7 @@ public class AddFragment extends Fragment {
                 RadioButton rb = mView.findViewById(id_btn);
                 parking = rb.getText().toString();
 
-                myDB.addHiker(new Hiker(id, name, location, doh, parking, length, level, des));
+                myDB.addHike(new Hike(id, name, location, doh, parking, length, level, des));
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -150,7 +150,7 @@ public class AddFragment extends Fragment {
         new AlertDialog.Builder(getActivity())
                 .setTitle("Error")
                 .setMessage(
-                        "You need to fill all required fields or fill in the correct email!"
+                        "You need to fill all required fields!"
                 )
                 .setNeutralButton("Close", (dialogInterface, i) -> {
 

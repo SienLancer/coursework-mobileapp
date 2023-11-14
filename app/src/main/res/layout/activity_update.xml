@@ -35,8 +35,7 @@
             android:text="Update Information"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="24sp" />
 
     </LinearLayout>
 
@@ -55,10 +54,10 @@
             android:id="@+id/name_txt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Name of the hike"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -67,9 +66,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edt_bg"
             android:ems="10"
-            android:hint=""
             android:inputType="text"
-            android:padding="7dp" />
+            android:padding="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -87,10 +85,10 @@
             android:id="@+id/location_txt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Location"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -101,7 +99,7 @@
             android:ems="10"
             android:hint=""
             android:inputType="text"
-            android:padding="7dp" />
+            android:padding="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -119,10 +117,10 @@
             android:id="@+id/doh_txt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Date of the hike"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -131,6 +129,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edt_bg"
             android:padding="7dp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="12sp"
             android:text="Click here to select the date of the hike" />
     </LinearLayout>
 
@@ -153,7 +153,8 @@
             android:layout_weight="1"
             android:text="Parking available"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -161,6 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingLeft="30dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -170,6 +172,8 @@
                 android:layout_weight="1"
                 android:buttonTint="@color/green"
                 android:text="Yes"
+                android:fontFamily="@font/kodchasan"
+                android:textSize="12sp"
                 android:textColor="#000000" />
 
             <RadioButton
@@ -179,7 +183,9 @@
                 android:buttonTint="@color/green"
                 android:layout_weight="1"
                 android:text="No"
-                android:textColor="#0C0C0C" />
+                android:fontFamily="@font/kodchasan"
+                android:textSize="12sp"
+                android:textColor="#000000" />
         </RadioGroup>
     </LinearLayout>
 
@@ -201,7 +207,8 @@
             android:layout_weight="1"
             android:text="Length of the hike"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -211,8 +218,9 @@
             android:layout_weight="1"
             android:background="@drawable/edt_bg"
             android:hint="Km"
+            android:fontFamily="@font/kodchasan"
             android:inputType="number|numberDecimal"
-            android:padding="5dp"
+            android:paddingHorizontal="5dp"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -234,7 +242,8 @@
             android:layout_weight="1"
             android:text="Difficulty level"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <Spinner
@@ -263,10 +272,10 @@
             android:id="@+id/des_txt_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:text="Description"
             android:textColor="#000000"
-            android:textSize="16sp"
+            android:fontFamily="@font/kodchasan"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
@@ -279,7 +288,7 @@
             android:lines="8"
             android:maxLines="10"
             android:minLines="6"
-            android:padding="5dp" />
+            android:padding="10dp" />
 
     </LinearLayout>
 
